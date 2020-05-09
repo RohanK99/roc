@@ -214,6 +214,11 @@ AddOption('--disable-sox',
           action='store_true',
           help='disable SoX support in tools')
 
+AddOption('--disable-libsndfile',
+           dest='disable_libsndfile',
+           action='store_true',
+           help='disable libsndfile support in tools')
+
 AddOption('--disable-libunwind',
           dest='disable_libunwind',
           action='store_true',
@@ -676,6 +681,10 @@ else:
         if not GetOption('disable_pulseaudio') and platform in ['linux']:
             env.Append(ROC_TARGETS=[
                 'target_pulseaudio',
+            ])
+        if not GetOption('disable_libsndfile'):
+            env.Append(ROC_TARGETS=[
+                'target_libsndfile',
             ])
 
 env.Append(CXXFLAGS=[])
